@@ -4,7 +4,7 @@
 
     <div class="columns">
       <RecipeList @select="selectRecipe" :recipes="recipes"/>
-      <RecipeDetail :recipe="current"/>
+      <RecipeDetail :recipe="current" @remove="removeRecipe"/>
     </div>
   </div>
 </template>
@@ -34,6 +34,10 @@ export default {
     },
     selectRecipe(id) {
       this.current = this.recipes.find(r => r.id === id)
+    },
+    removeRecipe(id) {
+      this.current = null // чтобы в детальном описании не было удаленного рецепта
+      this.recipes = this.recipes.filter(r => r.id !== id)
     }
   }
 }
