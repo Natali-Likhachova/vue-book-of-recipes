@@ -3,10 +3,10 @@
     <h1>Добавить рецепт</h1>
     <div>
       <div class="input">
-        <input type="text" placeholder="Название рецепта">
+        <input type="text" placeholder="Название рецепта" v-model="title">
       </div>
       <div class="input">
-        <input type="text" placeholder="Описание рецепта">
+        <input type="text" placeholder="Описание рецепта" v-model="description">
       </div>
     </div>
 
@@ -19,7 +19,12 @@
 
 <script>
 export default {
-
+  data() {
+    return{
+      title: '',
+      description:''
+    }
+  }
 }
 </script>
 
