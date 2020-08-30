@@ -21,6 +21,12 @@
 
 <script>
 export default {
+  props: {
+    onAdd: {
+      type: Function,
+      required: true
+    }
+  },
   data() {
     return {
       title: '',
@@ -40,6 +46,8 @@ export default {
       }
 
       this.title = this.description = '' // для очистки формы
+
+      this.onAdd(recipe)
     }
   },
   computed: {
