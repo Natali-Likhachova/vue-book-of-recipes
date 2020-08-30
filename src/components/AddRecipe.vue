@@ -1,7 +1,7 @@
 <template>
-  <form class="form">
+  <form class="form" @submit.prevent="submit">
     <h1>Добавить рецепт</h1>
-    <div>
+    <div v-if="visible">
       <div class="input">
         <input type="text" placeholder="Название рецепта" v-model="title">
       </div>
@@ -11,8 +11,10 @@
     </div>
 
     <div class="buttons">
-      <button class="btn" type="submit">Создать</button>
-      <button class="btn secondary" type="button">Убрать форму</button>
+      <button class="btn" type="submit" :disabled="!valid">Создать</button><!-- кнопка будет не активна, до тех пор пока форма не валидна -->
+      <button class="btn secondary" type="button" @click="toggle">
+        {{ visible ? 'Убрать' : 'Показать' }} форму
+      </button>
     </div>
   </form>
 </template>
@@ -20,11 +22,32 @@
 <script>
 export default {
   data() {
-    return{
+    return {
       title: '',
-      description:''
+      description: '',
+      visible: true
+    }
+  },
+  methods: {
+    toggle() {
+      this.visible = !this.visible
+    },
+    submit() {
+      const recipe = {
+        title: this.title.trim(),
+        description: this.description.trim(),
+        id: Date.now().toString()
+      }
+
+      this.title = this.description = '' // для очистки формы
+    }
+  },
+  computed: {
+    valid() {
+      return this.title.trim() && this.description.trim()
     }
   }
+
 }
 </script>
 
