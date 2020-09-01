@@ -20,13 +20,15 @@
 </template>
 
 <script>
+  import toggleMixin from "./toggleMixin";
 export default {
   props: {
     onAdd: {
       type: Function,
-      required: true
+      // required: true
     }
   },
+  mixins: [toggleMixin],
   data() {
     return {
       title: '',
@@ -35,9 +37,9 @@ export default {
     }
   },
   methods: {
-    toggle() {
-      this.visible = !this.visible
-    },
+    // toggle() {
+    //   this.visible = !this.visible
+    // },
     submit() {
       const recipe = {
         title: this.title.trim(),
