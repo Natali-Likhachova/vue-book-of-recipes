@@ -20,7 +20,7 @@
 </template>
 
 <script>
-  // import toggleMixin from "./toggleMixin";
+  import {ref} from '@vue/composition-api'
 export default {
   props: {
     onAdd: {
@@ -28,18 +28,29 @@ export default {
       required: true
     }
   },
-  // mixins: [toggleMixin],
+  setup() {
+    // в setup нет this
+    const visible = ref(true)// ref создает реактивную ссылку
+
+    const toggle = () => {
+      visible.value = !visible.value
+    }
+
+    return {
+      visible, toggle
+    }
+  },
   data() {
     return {
       title: '',
       description: '',
-      visible: true
+      // visible: true
     }
   },
   methods: {
-    toggle() {
-      this.visible = !this.visible
-    },
+    // toggle() {
+    //   this.visible = !this.visible
+    // },
     submit() {
       const recipe = {
         title: this.title.trim(),
